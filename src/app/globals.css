@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #08090b;
-  --background-elevated: #0e1013;
-  --foreground: #f2f3f5;
-  --muted: #888e99;
-  --border: #1c1f24;
-  --accent: #57e6c6;
-  --accent-foreground: #06110d;
-  --accent-warm: #ff8a4c;
+  --background: #0a0806;
+  --background-elevated: #120d09;
+  --foreground: #f6f1ec;
+  --muted: #8f8578;
+  --border: #211a14;
+  --accent: #ff6a1a;
+  --accent-foreground: #1a0900;
 }
 
 @theme inline {
@@ -19,7 +18,6 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-accent-warm: var(--accent-warm);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
   --font-mono: var(--font-mono);
@@ -85,5 +83,43 @@ body {
   .field-edge {
     animation: none;
     opacity: 0.18;
+  }
+}
+
+.glow-word {
+  animation: glow-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 24px rgba(255, 106, 26, 0.25);
+  }
+  50% {
+    text-shadow: 0 0 46px rgba(255, 106, 26, 0.55);
+  }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-word {
+    animation: none;
+    text-shadow: 0 0 30px rgba(255, 106, 26, 0.35);
+  }
+  .cursor-blink {
+    animation: none;
   }
 }
