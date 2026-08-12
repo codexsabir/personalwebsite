@@ -3,20 +3,30 @@
 :root {
   --background: #0a0806;
   --background-elevated: #120d09;
+  --surface: #17110c;
   --foreground: #f6f1ec;
-  --muted: #8f8578;
-  --border: #211a14;
+  --muted: #9a8f81;
+  --muted-strong: #c4b8a8;
+  --border: #241c15;
+  --border-strong: #35291e;
   --accent: #ff6a1a;
+  --accent-soft: #ffa055;
+  --accent-deep: #c94a06;
   --accent-foreground: #1a0900;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-background-elevated: var(--background-elevated);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-muted-strong: var(--muted-strong);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-deep: var(--accent-deep);
   --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
@@ -29,6 +39,7 @@
 
 html {
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -50,13 +61,27 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--border-strong);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--muted);
 }
+
+/* Film grain: breaks up the flat black so large dark areas read as a surface
+   rather than an empty void. Self-contained SVG, no network request. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- Hero node field ---------------------------------------------------- */
 
 .field-node {
   opacity: 0.15;
@@ -78,13 +103,7 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .field-node,
-  .field-edge {
-    animation: none;
-    opacity: 0.18;
-  }
-}
+/* --- Text treatments ---------------------------------------------------- */
 
 .glow-word {
   animation: glow-pulse 3.2s ease-in-out infinite;
@@ -114,12 +133,121 @@ body {
   }
 }
 
+/* --- Surfaces ----------------------------------------------------------- */
+
+.card {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: linear-gradient(160deg, var(--background-elevated), var(--background));
+  transition:
+    border-color 0.4s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+}
+
+/* Cursor-tracked highlight. Components set --mx/--my on pointer move. */
+.card-spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 106, 26, 0.09),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.card-spot:hover::before {
+  opacity: 1;
+}
+
+.rule-accent {
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+/* --- Self-drawing SVG paths --------------------------------------------- */
+
+.draw-line {
+  stroke-dasharray: var(--len, 1000);
+  stroke-dashoffset: var(--len, 1000);
+  animation: draw 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* --- Chat --------------------------------------------------------------- */
+
+.typing-dot {
+  animation: typing 1.2s ease-in-out infinite;
+}
+
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* --- Ambient ------------------------------------------------------------ */
+
+.aurora {
+  background: radial-gradient(
+    60% 60% at 50% 40%,
+    rgba(255, 106, 26, 0.16),
+    transparent 70%
+  );
+  animation: drift 14s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(-4%, -2%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, 3%, 0) scale(1.12);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .field-node,
+  .field-edge,
+  .glow-word,
+  .cursor-blink,
+  .typing-dot,
+  .aurora,
+  .draw-line {
+    animation: none !important;
+  }
+  .field-node,
+  .field-edge {
+    opacity: 0.18;
+  }
   .glow-word {
-    animation: none;
     text-shadow: 0 0 30px rgba(255, 106, 26, 0.35);
   }
-  .cursor-blink {
-    animation: none;
+  .draw-line {
+    stroke-dashoffset: 0;
   }
 }
