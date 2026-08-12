@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  --background: #08090b;
+  --background-elevated: #0e1013;
+  --foreground: #f2f3f5;
+  --muted: #888e99;
+  --border: #1c1f24;
+  --accent: #57e6c6;
+  --accent-foreground: #06110d;
+  --accent-warm: #ff8a4c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-warm: var(--accent-warm);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+.field-node {
+  opacity: 0.15;
+  animation: field-pulse 5s ease-in-out infinite;
+}
+
+.field-edge {
+  opacity: 0.08;
+  animation: field-pulse 6s ease-in-out infinite;
+}
+
+@keyframes field-pulse {
+  0%,
+  100% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.32;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-node,
+  .field-edge {
+    animation: none;
+    opacity: 0.18;
+  }
+}
