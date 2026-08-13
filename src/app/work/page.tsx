@@ -28,17 +28,17 @@ export default function WorkPage() {
                 <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
                   <div>
                     <h2 className="font-display text-xl text-foreground sm:text-2xl">{role.role}</h2>
-                    <p className="mt-1 text-sm text-accent">{role.company}</p>
+                    <p className="mt-1 prose-body text-accent">{role.company}</p>
                   </div>
                   <div className="text-left sm:text-right">
-                    <p className="font-mono text-xs text-muted-strong">{role.period}</p>
-                    <p className="mt-1 font-mono text-[11px] text-muted">{role.place}</p>
+                    <p className="label text-muted-strong">{role.period}</p>
+                    <p className="mt-1 label text-muted">{role.place}</p>
                   </div>
                 </div>
 
                 <ul className="mt-6 space-y-2.5">
                   {role.points.map((point) => (
-                    <li key={point} className="flex gap-3 text-sm leading-relaxed text-muted">
+                    <li key={point} className="flex gap-3 prose-body text-muted">
                       <span aria-hidden="true" className="mt-2 h-px w-3 shrink-0 bg-accent/50" />
                       {point}
                     </li>
@@ -49,7 +49,7 @@ export default function WorkPage() {
                   {role.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="rounded-full border border-border px-2.5 py-1 font-mono text-[11px] text-muted"
+                      className="rounded-full border border-border px-2.5 py-1 label text-muted"
                     >
                       {tech}
                     </li>
@@ -71,10 +71,10 @@ export default function WorkPage() {
           {skills.map((set) => (
             <RevealItem key={set.group}>
               <div className="card h-full p-5">
-                <h3 className="font-mono text-xs text-accent">{set.group}</h3>
+                <h3 className="label text-accent">{set.group}</h3>
                 <ul className="mt-3 space-y-1.5">
                   {set.items.map((item) => (
-                    <li key={item} className="text-sm leading-relaxed text-muted">
+                    <li key={item} className="prose-body text-muted">
                       {item}
                     </li>
                   ))}
@@ -90,13 +90,13 @@ export default function WorkPage() {
           <div className="card flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 p-6">
             <div>
               <h2 className="font-display text-lg text-foreground">{education.degree}</h2>
-              <p className="mt-1 text-sm text-muted">
+              <p className="mt-1 prose-body text-muted">
                 {education.school} · {education.place}
               </p>
             </div>
             <div className="text-left sm:text-right">
-              <p className="font-mono text-xs text-muted-strong">{education.period}</p>
-              <p className="mt-1 font-mono text-[11px] text-muted">{languages.join(" · ")}</p>
+              <p className="label text-muted-strong">{education.period}</p>
+              <p className="mt-1 label text-muted">{languages.join(" · ")}</p>
             </div>
           </div>
         </Reveal>

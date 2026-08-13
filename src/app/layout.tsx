@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ChatWidget } from "@/components/chat/chat-widget";
-import { CursorGlow } from "@/components/cursor-glow";
+import { InteractiveField } from "@/components/interactive-field";
+import { PointerRing } from "@/components/pointer-ring";
 import { ProgressRail } from "@/components/progress-rail";
 
 const bodyFont = Inter({
@@ -43,7 +44,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${bodyFont.variable} ${displayFont.variable} ${monoFont.variable} h-full antialiased`}
     >
       <body className="grain relative min-h-full flex flex-col bg-background font-sans text-foreground">
-        <CursorGlow />
+        <InteractiveField />
+        <PointerRing />
         <ProgressRail />
         <main className="relative z-10 flex flex-1 flex-col">{children}</main>
         <ChatWidget />

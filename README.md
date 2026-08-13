@@ -27,7 +27,17 @@ Dark warm-black canvas with a single orange accent (`#ff6a1a`). A few deliberate
 - **Accent colour is rationed** to the one word or number that matters on each screen, so it never stops meaning "look here".
 - **Every claim carries proof.** The why-me page pairs each assertion with a specific number or shipped project, because unfalsifiable adjectives are what makes most portfolios interchangeable.
 
-Motion: word-by-word blur-in on the hero, a pointer-parallax node field, a scroll-drawn process spine, count-up metrics, magnetic buttons, cursor spotlight, and route transitions. All of it collapses under `prefers-reduced-motion`.
+**Readability** is held deliberately high for a dark theme: body copy sits at 15px minimum and every text token clears WCAG AAA (7:1) against both the page and card backgrounds — `muted` at 9.4:1, `muted-strong` at 13.5:1. Mono micro-labels are 12px with opened tracking; below that they stop being readable and start being texture.
+
+### The pointer field
+
+The background is a live network (`src/components/interactive-field.tsx`) in which **the pointer is a node, not a spectator**. Move, and the nearest nodes link to you, brighten, and drift your way. Click, and the network takes the shock — a ripple expands and pushes nodes outward. It's the site's one sentence rendered as behaviour rather than decoration, and it runs on every page.
+
+Canvas rather than SVG, because this draws several hundred lines per frame; as DOM nodes that would be thousands of style recalculations. It caps particle count by viewport area, pauses on hidden tabs, and degrades to a single static frame under `prefers-reduced-motion`.
+
+A ring also trails the pointer and opens over anything clickable. The native cursor is deliberately left visible — a replaced cursor that lags even slightly makes precise clicking feel broken.
+
+Other motion: word-by-word blur-in on the hero, a scroll-drawn process spine, count-up metrics, magnetic buttons, and route transitions. All of it collapses under `prefers-reduced-motion`.
 
 ## The chat assistant
 

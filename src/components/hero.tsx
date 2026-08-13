@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect } from "react";
-import { SystemsField } from "./systems-field";
+import { motion } from "framer-motion";
 import { Magnetic } from "./magnetic";
 import { journey } from "@/lib/journey";
 
@@ -23,32 +21,8 @@ const word = {
 const next = journey[1];
 
 export function Hero() {
-  // The node field drifts against the pointer, a little like parallax through
-  // a window. It makes the background feel like it has depth behind the words.
-  const px = useMotionValue(0);
-  const py = useMotionValue(0);
-  const driftX = useSpring(px, { stiffness: 40, damping: 20 });
-  const driftY = useSpring(py, { stiffness: 40, damping: 20 });
-
-  useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const onMove = (event: PointerEvent) => {
-      px.set((event.clientX / window.innerWidth - 0.5) * -36);
-      py.set((event.clientY / window.innerHeight - 0.5) * -36);
-    };
-
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
-  }, [px, py]);
-
   return (
     <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6">
-      <motion.div style={{ x: driftX, y: driftY }} className="pointer-events-none absolute -inset-12">
-        <SystemsField />
-      </motion.div>
-
       <div aria-hidden="true" className="aurora pointer-events-none absolute inset-0" />
 
       <motion.h1
@@ -85,7 +59,7 @@ export function Hero() {
             href={next.href}
             className="group flex items-center gap-4 rounded-full border border-border-strong bg-background-elevated/70 py-2 pl-6 pr-2 backdrop-blur transition-colors hover:border-accent/60"
           >
-            <span className="font-mono text-xs text-muted transition-colors group-hover:text-foreground">
+            <span className="label text-muted transition-colors group-hover:text-foreground">
               Start here
             </span>
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground transition-transform duration-300 group-hover:translate-x-0.5">
@@ -99,9 +73,9 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.4, duration: 1 }}
-        className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 font-mono text-[11px] text-muted/60 lg:block"
+        className="label absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 text-muted-faint lg:block"
       >
-        press → to move through
+        move your cursor · press → to go on
       </motion.p>
     </section>
   );

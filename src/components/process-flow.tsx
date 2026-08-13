@@ -52,7 +52,7 @@ export function ProcessFlow() {
           </span>
 
           <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <span className="font-mono text-xs text-accent">{item.step}</span>
+            <span className="label text-accent">{item.step}</span>
             <h2 className="font-display text-xl leading-snug text-foreground sm:text-2xl">
               {item.title}
             </h2>
@@ -60,7 +60,7 @@ export function ProcessFlow() {
 
           <p className="mt-4 max-w-2xl leading-relaxed text-muted">{item.detail}</p>
 
-          <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background-elevated px-3 py-1.5 font-mono text-[11px] text-muted-strong">
+          <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background-elevated px-3 py-1.5 label text-muted-strong">
             <span className="text-accent">?</span>
             {item.signal}
           </p>

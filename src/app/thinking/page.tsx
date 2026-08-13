@@ -25,17 +25,17 @@ export default function ThinkingPage() {
           {models.map((model) => (
             <RevealItem key={model.id}>
               <SpotlightCard className="flex h-full flex-col p-6">
-                <span className="font-mono text-xs text-accent">{model.id}</span>
+                <span className="label text-accent">{model.id}</span>
 
                 <h2 className="mt-4 font-display text-xl leading-snug text-foreground">
                   {model.title}
                 </h2>
 
-                <p className="mt-3 border-l border-accent/40 pl-3 text-sm italic leading-relaxed text-muted-strong">
+                <p className="mt-3 border-l border-accent/40 pl-3 prose-body italic text-muted-strong">
                   {model.principle}
                 </p>
 
-                <p className="mt-4 text-sm leading-relaxed text-muted">{model.body}</p>
+                <p className="mt-4 prose-body text-muted">{model.body}</p>
               </SpotlightCard>
             </RevealItem>
           ))}
