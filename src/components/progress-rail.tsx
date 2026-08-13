@@ -55,7 +55,7 @@ export function ProgressRail() {
                     )}
                   </span>
                   <span
-                    className={`whitespace-nowrap font-mono text-[11px] transition-all duration-300 ${
+                    className={`whitespace-nowrap label transition-all duration-300 ${
                       isActive
                         ? "text-foreground opacity-100"
                         : "text-muted opacity-0 group-hover:opacity-100"

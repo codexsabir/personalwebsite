@@ -29,21 +29,21 @@ export default function ProjectsPage() {
               <SpotlightCard className="p-6 sm:p-8">
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                   <h2 className="font-display text-2xl text-foreground">{project.name}</h2>
-                  <span className="font-mono text-xs text-accent">{project.kind}</span>
+                  <span className="label text-accent">{project.kind}</span>
                 </div>
 
                 <dl className="mt-6 grid gap-5 sm:grid-cols-2">
                   <div>
-                    <dt className="font-mono text-[11px] uppercase tracking-wider text-muted/70">
+                    <dt className="label uppercase text-muted-faint">
                       The problem
                     </dt>
-                    <dd className="mt-2 text-sm leading-relaxed text-muted">{project.problem}</dd>
+                    <dd className="mt-2 prose-body text-muted">{project.problem}</dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[11px] uppercase tracking-wider text-muted/70">
+                    <dt className="label uppercase text-muted-faint">
                       What I built
                     </dt>
-                    <dd className="mt-2 text-sm leading-relaxed text-muted-strong">
+                    <dd className="mt-2 prose-body text-muted-strong">
                       {project.solution}
                     </dd>
                   </div>
@@ -59,7 +59,7 @@ export default function ProjectsPage() {
                           metric.value
                         )}
                       </p>
-                      <p className="mt-1 font-mono text-[11px] text-muted">{metric.label}</p>
+                      <p className="mt-1 label text-muted">{metric.label}</p>
                     </li>
                   ))}
                 </ul>
@@ -68,7 +68,7 @@ export default function ProjectsPage() {
                   {project.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="rounded-full border border-border px-2.5 py-1 font-mono text-[11px] text-muted"
+                      className="rounded-full border border-border px-2.5 py-1 label text-muted"
                     >
                       {tech}
                     </li>

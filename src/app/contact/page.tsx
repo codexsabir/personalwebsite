@@ -45,7 +45,7 @@ export default function ContactPage() {
           {channels.map((channel) => (
             <RevealItem key={channel.label}>
               <div className="h-full bg-background-elevated p-6">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-muted/70">
+                <p className="label uppercase text-muted-faint">
                   {channel.label}
                 </p>
                 {channel.href ? (
@@ -74,13 +74,13 @@ export default function ContactPage() {
             </h2>
             <ul className="mt-5 space-y-3">
               {helpful.map((line, i) => (
-                <li key={line} className="flex gap-4 text-sm leading-relaxed text-muted">
-                  <span className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <li key={line} className="flex gap-4 prose-body text-muted">
+                  <span className="label text-accent">{String(i + 1).padStart(2, "0")}</span>
                   {line}
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm leading-relaxed text-muted-strong">
+            <p className="mt-6 prose-body text-muted-strong">
               I read everything, and I&apos;ll tell you honestly if I&apos;m not the right person for
               it — usually with a suggestion of who might be.
             </p>
@@ -93,7 +93,7 @@ export default function ContactPage() {
           <p className="font-display text-2xl leading-snug text-foreground sm:text-3xl">
             An engineer who thinks in <span className="glow-word text-accent">systems.</span>
           </p>
-          <p className="mt-3 font-mono text-xs text-muted">
+          <p className="mt-3 label text-muted">
             {profile.name} · {profile.location}
           </p>
         </Reveal>

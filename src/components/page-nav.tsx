@@ -43,7 +43,7 @@ export function PageNav() {
         {prev ? (
           <Link
             href={prev.href}
-            className="group inline-flex items-center gap-2 font-mono text-xs text-muted transition-colors hover:text-foreground"
+            className="group inline-flex items-center gap-2 label text-muted transition-colors hover:text-foreground"
           >
             <span className="transition-transform group-hover:-translate-x-1">←</span>
             {prev.label}
@@ -51,7 +51,7 @@ export function PageNav() {
         ) : (
           <span />
         )}
-        <span className="hidden font-mono text-[11px] text-muted/60 sm:inline">
+        <span className="hidden label text-muted-faint sm:inline">
           {String(index + 1).padStart(2, "0")} / {String(journey.length).padStart(2, "0")}
         </span>
       </div>
@@ -63,7 +63,7 @@ export function PageNav() {
             className="group flex w-full items-center justify-between gap-6 rounded-full border border-border-strong bg-background-elevated px-6 py-4 transition-colors hover:border-accent/60 sm:w-auto"
           >
             <span className="flex flex-col text-left">
-              <span className="font-mono text-[11px] text-muted">{next.question}</span>
+              <span className="label text-muted">{next.question}</span>
               <span className="font-display text-base text-foreground">{next.label}</span>
             </span>
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground transition-transform duration-300 group-hover:translate-x-1">

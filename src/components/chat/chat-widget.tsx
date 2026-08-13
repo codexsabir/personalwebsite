@@ -149,8 +149,8 @@ export function ChatWidget() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <div className="flex flex-col">
-                <span className="font-display text-sm text-foreground">Ask about Sabir</span>
-                <span className="font-mono text-[10px] text-muted">
+                <span className="font-display text-base text-foreground">Ask about Sabir</span>
+                <span className="label text-muted-faint">
                   scripted answers · no model, no guessing
                 </span>
               </div>
@@ -166,7 +166,7 @@ export function ChatWidget() {
                   className={message.from === "me" ? "flex justify-end" : "flex justify-start"}
                 >
                   <p
-                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 prose-body ${
                       message.from === "me"
                         ? "rounded-br-sm bg-accent text-accent-foreground"
                         : "rounded-bl-sm border border-border bg-surface text-muted-strong"
@@ -203,7 +203,7 @@ export function ChatWidget() {
                       <button
                         type="button"
                         onClick={() => send(intent.suggestion!, intent)}
-                        className="rounded-full border border-border px-3 py-1.5 text-left font-mono text-[11px] text-muted transition-colors hover:border-accent/60 hover:text-foreground"
+                        className="rounded-full border border-border px-3 py-1.5 text-left label text-muted transition-colors hover:border-accent/60 hover:text-foreground"
                       >
                         {intent.suggestion}
                       </button>
@@ -226,7 +226,7 @@ export function ChatWidget() {
                 onChange={(event) => setDraft(event.target.value)}
                 placeholder="Type a question…"
                 aria-label="Your question"
-                className="min-w-0 flex-1 rounded-full bg-surface px-4 py-2.5 text-sm text-foreground outline-none placeholder:text-muted/70 focus:ring-1 focus:ring-accent/50"
+                className="min-w-0 flex-1 rounded-full bg-surface px-4 py-2.5 prose-body text-foreground outline-none placeholder:text-muted-faint focus:ring-1 focus:ring-accent/50"
               />
               <button
                 type="submit"

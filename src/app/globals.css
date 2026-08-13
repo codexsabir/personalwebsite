@@ -1,16 +1,22 @@
 @import "tailwindcss";
 
+/*
+ * Contrast ratios against --background are noted per token. Body copy is held
+ * at AAA (7:1+) rather than AA, because most of this site is small text on a
+ * dark ground and the earlier muted value was only scraping 6.3:1.
+ */
 :root {
   --background: #0a0806;
   --background-elevated: #120d09;
   --surface: #17110c;
-  --foreground: #f6f1ec;
-  --muted: #9a8f81;
-  --muted-strong: #c4b8a8;
-  --border: #241c15;
-  --border-strong: #35291e;
-  --accent: #ff6a1a;
-  --accent-soft: #ffa055;
+  --foreground: #f6f1ec; /* 17.8:1 */
+  --muted: #bcb0a0; /* 9.4:1  — body copy */
+  --muted-strong: #ddd3c6; /* 13.5:1 — lede and emphasis */
+  --muted-faint: #9c9182; /* 6.4:1  — decorative micro-labels only */
+  --border: #2a211a;
+  --border-strong: #3d2f22;
+  --accent: #ff6a1a; /* 7.0:1  — large text, fills */
+  --accent-soft: #ffb27a; /* 11.3:1 — small accent text */
   --accent-deep: #c94a06;
   --accent-foreground: #1a0900;
 }
@@ -22,6 +28,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-strong: var(--muted-strong);
+  --color-muted-faint: var(--muted-faint);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
@@ -45,6 +52,26 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  font-size: 1rem;
+  line-height: 1.7;
+  /* Dark backgrounds make type look heavier than it is; this thins it back. */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Body copy sits at 15px minimum rather than Tailwind's 14px `text-sm`,
+   which was doing most of the work in the card layouts. */
+.prose-body {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+/* Mono micro-labels: 12px with opened tracking. Below this they stop being
+   readable and start being texture. */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
 }
 
 ::selection {
@@ -77,7 +104,7 @@ body {
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.022;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -208,11 +235,13 @@ body {
 
 /* --- Ambient ------------------------------------------------------------ */
 
+/* Kept deliberately faint. The pointer field now supplies the moving light,
+   and a strong constant wash behind the headline only costs contrast. */
 .aurora {
   background: radial-gradient(
-    60% 60% at 50% 40%,
-    rgba(255, 106, 26, 0.16),
-    transparent 70%
+    55% 55% at 50% 42%,
+    rgba(255, 106, 26, 0.085),
+    transparent 72%
   );
   animation: drift 14s ease-in-out infinite;
 }

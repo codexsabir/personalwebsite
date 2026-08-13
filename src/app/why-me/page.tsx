@@ -35,7 +35,7 @@ export default function WhyMePage() {
                 <div className="flex-1">
                   <h2 className="font-display text-xl leading-snug text-foreground">{item.title}</h2>
                   <p className="mt-3 leading-relaxed text-muted">{item.claim}</p>
-                  <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.06] px-3 py-1.5 font-mono text-[11px] text-accent-soft">
+                  <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.06] px-3 py-1.5 label text-accent-soft">
                     <span aria-hidden="true">✓</span>
                     {item.proof}
                   </p>
@@ -54,7 +54,7 @@ export default function WhyMePage() {
               the ones who can look at a mess of a business process and see{" "}
               <span className="text-accent">the system underneath it.</span>
             </p>
-            <footer className="mt-6 font-mono text-xs text-muted">
+            <footer className="mt-6 label text-muted">
               — what I&apos;m actually selling
             </footer>
           </blockquote>
