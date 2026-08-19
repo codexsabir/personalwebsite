@@ -37,7 +37,19 @@ Canvas rather than SVG, because this draws several hundred lines per frame; as D
 
 A ring also trails the pointer and opens over anything clickable. The native cursor is deliberately left visible — a replaced cursor that lags even slightly makes precise clicking feel broken.
 
-Other motion: word-by-word blur-in on the hero, a scroll-drawn process spine, count-up metrics, magnetic buttons, and route transitions. All of it collapses under `prefers-reduced-motion`.
+Other motion: word-by-word blur-in on the hero, a self-typing code block that writes the six-step process out as real code, a scroll-drawn process spine, count-up metrics, magnetic buttons, and route transitions. All of it collapses under `prefers-reduced-motion` — the code block still appears, it just arrives instead of typing.
+
+### Adding the portrait
+
+**Save your photo as `public/portrait.png`.** It appears at 20% opacity behind the hero (right side) and behind the contact header — the two places a face earns its keep: hello and goodbye.
+
+- **Cut out, transparent background.** The layer is sized with `contain` and edge-masked, so a cut-out composites cleanly on the dark page. A photo that still has its studio background works too — the mask dissolves the rectangle — but it lifts a faint haze where the backdrop used to be, so the cut-out is noticeably better.
+- **Export around 900–1200px wide, under ~300KB.** It's a 20%-opacity grayscale backdrop, so quality demands are low and the file shouldn't be a megabyte.
+- Portrait aspect (roughly 2:3) suits the layout best.
+
+If the file isn't there the site renders exactly as it does now — the layer is a CSS background rather than an `<img>` specifically so a missing file degrades to nothing instead of a broken-image box. The trade is losing `next/image`'s automatic format conversion, which is why the export guidance above matters.
+
+Tone is handled in CSS (`.portrait` in `globals.css`): desaturated to stay out of the orange palette's way, slightly brightened so dark hair doesn't sink into a dark page, and radially masked so the figure emerges from the page rather than sitting on it like a sticker.
 
 ## The chat assistant
 

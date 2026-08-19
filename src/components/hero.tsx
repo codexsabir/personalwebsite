@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Magnetic } from "./magnetic";
+import { PortraitBackdrop } from "./portrait-backdrop";
+import { TypedCode } from "./typed-code";
 import { journey } from "@/lib/journey";
 
 const words = ["An", "engineer", "who", "thinks", "in"];
@@ -23,7 +25,19 @@ const next = journey[1];
 export function Hero() {
   return (
     <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6">
+      <PortraitBackdrop />
       <div aria-hidden="true" className="aurora pointer-events-none absolute inset-0" />
+
+      {/* Code left, face right, message centre. Both flanks stay well under
+          the headline's contrast so the sentence still lands first. */}
+      <motion.div
+        initial={{ opacity: 0, x: -12 }}
+        animate={{ opacity: 0.55, x: 0 }}
+        transition={{ delay: 1.9, duration: 1.1, ease }}
+        className="pointer-events-none absolute bottom-16 left-10 z-10 hidden xl:block"
+      >
+        <TypedCode />
+      </motion.div>
 
       <motion.h1
         variants={container}
