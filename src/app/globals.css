@@ -233,6 +233,54 @@ body {
   }
 }
 
+/* --- Portrait backdrop --------------------------------------------------- */
+
+/*
+ * Drop the photo at public/portrait.png — cut out, transparent background.
+ * If the file isn't there this renders nothing rather than a broken-image box,
+ * which is the main reason it's a background and not an <img>.
+ *
+ * `contain` not `cover`: a cut-out must never be cropped through the face.
+ * grayscale() keeps it out of the orange palette's way, and the slight
+ * brightness lift stops a dark-haired subject sinking into a dark page.
+ *
+ * The radial mask matters even for a clean cut-out — it softens the hard
+ * shoulder line so the figure emerges from the page instead of sitting on it
+ * like a sticker. With a photo that still has its studio background, the same
+ * mask is what dissolves the rectangle.
+ */
+.portrait {
+  background-image: url("/portrait.png");
+  background-size: contain;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  filter: grayscale(1) contrast(1.12) brightness(1.06);
+  -webkit-mask-image: radial-gradient(
+    ellipse 62% 70% at 50% 44%,
+    #000 34%,
+    rgba(0, 0, 0, 0.5) 64%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    ellipse 62% 70% at 50% 44%,
+    #000 34%,
+    rgba(0, 0, 0, 0.5) 64%,
+    transparent 82%
+  );
+  animation: portrait-breathe 22s ease-in-out infinite;
+}
+
+@keyframes portrait-breathe {
+  0%,
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.045) translate3d(0, -0.8%, 0);
+  }
+}
+
 /* --- Ambient ------------------------------------------------------------ */
 
 /* Kept deliberately faint. The pointer field now supplies the moving light,
@@ -266,7 +314,8 @@ body {
   .cursor-blink,
   .typing-dot,
   .aurora,
-  .draw-line {
+  .draw-line,
+  .portrait {
     animation: none !important;
   }
   .field-node,

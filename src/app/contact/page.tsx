@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ContactActions } from "@/components/contact-actions";
 import { PageHeader } from "@/components/page-header";
 import { PageNav } from "@/components/page-nav";
+import { PortraitBackdrop } from "@/components/portrait-backdrop";
 import { Reveal, RevealItem } from "@/components/reveal";
 import { profile } from "@/lib/profile";
 
@@ -27,6 +28,13 @@ const helpful = [
 export default function ContactPage() {
   return (
     <>
+      {/* The one page where a face earns its place: you're asking a person to
+          write to a person. Pinned to the header area so it never sits behind
+          the body copy further down. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[70vh] overflow-hidden">
+        <PortraitBackdrop />
+      </div>
+
       <PageHeader
         eyebrow="talk to me"
         title="If any of that sounded like the person you need,"
